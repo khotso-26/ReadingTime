@@ -5,25 +5,28 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Page {
-    File myObject;
-    Scanner scanner;
+    private final StringBuilder words;
+    private final File myObject;
 
-    public Page(String fileName){
+    public Page(String fileName) {
+        this.words = new StringBuilder();
         this.myObject = new File(fileName);
     }
 
-    public String data(){
+    public String[] scanPage() {
+        Scanner scanner;
         try {
-            String string = null;
             scanner = new Scanner(myObject);
-            while(scanner.hasNextLine()){
-                string = scanner.nextLine();
+            while(scanner.hasNextLine()) {
+                words.append(scanner.nextLine());
             }
             scanner.close();
-            return string;
+            return words.toString().split("\\s+");
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
