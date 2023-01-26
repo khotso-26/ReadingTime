@@ -27,6 +27,4 @@ public class Page {
             throw new RuntimeException(e);
         }
     }
-
-
 }

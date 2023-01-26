@@ -46,6 +46,4 @@ public class Calculator {
             return "Total reading time [ " + totalReadingTime + " minutes : " + seconds + " seconds ]";
         return "Total reading time [ " + totalReadingTime + " minutes ]";
     }
-
-  
 }
