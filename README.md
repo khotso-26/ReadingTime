@@ -17,7 +17,4 @@ Example:
 reading time for this example article is 4 minutes
 
 It seems like reading time calculations go off and on trend, 
-but we like to include them to give people a heads-up before they dive into a post or newsletter article. 
-Hope this reading time formula helps you out!
-
-*We found the original formula online, but I no longer remember where. If it might be yours, let us know.
+but we like to include them to give people a heads-up before they dive into a post or newsletter article.

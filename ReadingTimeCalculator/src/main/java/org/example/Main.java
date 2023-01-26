@@ -6,7 +6,7 @@ public class Main {
  
         Calculator calculator = new Calculator(page.scanPage());
         calculator.calculateTotalReadingTime();
-        System.out.println(calculator.toString());
+        System.out.println(calculator);
 
     }
 }
