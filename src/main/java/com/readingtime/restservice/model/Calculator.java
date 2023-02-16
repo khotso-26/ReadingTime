@@ -6,14 +6,9 @@ import static java.lang.Math.*;
 
 public class Calculator {
 
-    private int totalReadingTime;
     private String wordCount[];
     private String seconds;
     private String minutes;
-
-    public String getMinutes() {
-        return this.minutes;
-    }
 
     public Calculator() {
     }
@@ -31,6 +26,9 @@ public class Calculator {
         return this.seconds;
     }
 
+    public String getMinutes() {
+        return this.minutes;
+    }
 
 
 }
