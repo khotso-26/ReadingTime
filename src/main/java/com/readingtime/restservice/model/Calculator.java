@@ -23,7 +23,6 @@ public class Calculator {
         this.wordCount = String.valueOf(words.length/200d).split("\\.");
         this.seconds = String.valueOf(Integer.parseInt(wordCount[1]) * 60).substring(0,2);
         this.minutes = wordCount[0];
-        calculateTotalReadingTime();
     }
 
     public String getSeconds() {
@@ -32,18 +31,6 @@ public class Calculator {
         return this.seconds;
     }
 
-    public int getTotalReadingTime() {
-        return totalReadingTime =  round(Float.parseFloat(minutes + "." + seconds));
-    }
 
-    public void calculateTotalReadingTime() {
-
-        if (minutes.equals("0")) 
-            getSeconds();
-        else {
-            getSeconds();
-            getTotalReadingTime();
-        }
-    }
 
 }
