@@ -6,22 +6,21 @@ import static java.lang.Math.*;
 
 public class Calculator {
 
+    private int totalReadingTime;
     private String wordCount[];
     private String seconds;
     private String minutes;
 
     public String getMinutes() {
-        return minutes;
+        return this.minutes;
     }
-
-    private int totalReadingTime;
 
     public Calculator() {
     }
 
-    public Calculator( List<String> words) {
+    public Calculator( String[] words) {
 
-        this.wordCount = String.valueOf(words.size()/200d).split("\\.");
+        this.wordCount = String.valueOf(words.length/200d).split("\\.");
         this.seconds = String.valueOf(Integer.parseInt(wordCount[1]) * 60).substring(0,2);
         this.minutes = wordCount[0];
         calculateTotalReadingTime();

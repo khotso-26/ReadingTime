@@ -1,20 +1,14 @@
 package com.readingtime.restservice.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class Words {
 
-    private List<String> words;
+    private String[] ArrayOfWords;
 
     public Words(String words) {
-        this.words = new ArrayList<String>(Collections.singleton(words));
-        System.out.println(words);
+        this.ArrayOfWords = words.split("\\W+");
     }
 
-    public List<String> getWords() {
-        return words;
+    public String[] getArrayOfWords() {
+        return ArrayOfWords;
     }
 }
