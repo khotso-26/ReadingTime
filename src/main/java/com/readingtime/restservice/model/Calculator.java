@@ -10,9 +10,6 @@ public class Calculator {
     private String seconds;
     private String minutes;
 
-    public Calculator() {
-    }
-
     public Calculator( String[] words) {
 
         this.wordCount = String.valueOf(words.length/200d).split("\\.");
