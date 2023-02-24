@@ -7,6 +7,7 @@ import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -19,13 +20,19 @@ public class ReadingTimeController{
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/get")
-    public ReadingTime get(@RequestParam(value = "words") String words) {
-        Words word = new Words(words);
-        return new ReadingTime(counter.incrementAndGet(), new Calculator(word.getArrayOfWords()));
+    public List<ReadingTime> getAllContent() {
+        return readingTimeService.getAllContent();
     }
 
-    @PostMapping("/add")
-    public void ass(@RequestBody ReadingTime readingTime){
-        readingTimeService.saveReadingTime(readingTime);
+
+    @PostMapping("/calculate")
+    public void CalculateReadingTime(@RequestBody ReadingTime readingTime){
+        readingTimeService.calculateReadingTime(readingTime);
     }
+
+    @DeleteMapping(path = "{readingTimeId}")
+        public void DeleteReading(@PathVariable("radingTimeId") Long id){
+            readingTimeService.deleteReadingTime(id);
+        }
+
 }

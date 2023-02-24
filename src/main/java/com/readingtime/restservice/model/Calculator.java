@@ -1,9 +1,5 @@
 package com.readingtime.restservice.model;
 
-import java.util.List;
-
-import static java.lang.Math.*;
-
 public class Calculator {
 
     private String wordCount[];
@@ -27,5 +23,11 @@ public class Calculator {
         return this.minutes;
     }
 
-
+    @Override
+    public String toString() {
+        return "Calculator{" +
+                "seconds='" + seconds + '\'' +
+                ", minutes='" + minutes + '\'' +
+                '}';
+    }
 }

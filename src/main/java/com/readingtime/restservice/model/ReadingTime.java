@@ -1,19 +1,17 @@
 package com.readingtime.restservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
+@Table
 public class ReadingTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Calculator content;
+    private String content;
 
-    public ReadingTime(long id, Calculator content) {
+    public ReadingTime(long id, String content) {
         this.id = id;
         this.content = content;
     }
@@ -22,7 +20,7 @@ public class ReadingTime {
         return id;
     }
 
-    public Calculator getContent() {
+    public String getContent() {
         return content;
     }
 
@@ -30,7 +28,15 @@ public class ReadingTime {
         this.id = id;
     }
 
-    public void setContent(Calculator content) {
+    public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadingTime{" +
+                "id=" + id +
+                ", content=" + content +
+                '}';
     }
 }
