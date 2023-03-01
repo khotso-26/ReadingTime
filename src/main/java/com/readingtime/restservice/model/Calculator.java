@@ -2,13 +2,12 @@ package com.readingtime.restservice.model;
 
 public class Calculator {
 
-    private String wordCount[];
-    private String seconds;
+    private final String seconds;
     private String minutes;
 
     public Calculator( String[] words) {
 
-        this.wordCount = String.valueOf(words.length/200d).split("\\.");
+        String[] wordCount = String.valueOf(words.length / 200d).split("\\.");
         this.seconds = String.valueOf(Integer.parseInt(wordCount[1]) * 60).substring(0,2);
         this.minutes = wordCount[0];
     }

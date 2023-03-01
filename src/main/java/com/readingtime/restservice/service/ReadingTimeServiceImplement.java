@@ -6,9 +6,7 @@ import com.readingtime.restservice.model.Words;
 import com.readingtime.restservice.repository.ReadingTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReadingTimeServiceImplement implements ReadingTimeService {
@@ -17,22 +15,27 @@ public class ReadingTimeServiceImplement implements ReadingTimeService {
     private ReadingTimeRepository readingTimeRepository;
 
     @Override
-    public void calculateReadingTime(ReadingTime readTime) {
-        Optional<ReadingTime> content = readingTimeRepository.findWords(readTime.getContent());
-        if (content.isPresent()) {
-            Words words = new Words(content.toString());
-            Calculator calculator = new Calculator(words.getArrayOfWords());
-//            readingTimeRepository.saveAndFlush(calculator.toString());
-        }
-    }
-
-    @Override
     public List<ReadingTime> getAllContent() {
         return readingTimeRepository.findAll();
     }
 
     @Override
     public void deleteReadingTime(Long id) {
+        if ( readingTimeRepository.existsById(id) ) readingTimeRepository.deleteById(id);
 
+    }
+
+    @Override
+    public void getById(long id) {
+        if (readingTimeRepository.existsById(id)) readingTimeRepository.findById(id);
+    }
+
+    @Override
+    public void calculateReadingTime(ReadingTime reading) {
+        String content = reading.getContent();
+        Words words = new Words(content);
+        Calculator calculator = new Calculator(words.getArrayOfWords());
+        reading.setContent(calculator.toString());
+        readingTimeRepository.save(reading);
     }
 }

@@ -1,8 +1,7 @@
 package com.readingtime.restservice.controller;
 
-import com.readingtime.restservice.model.Calculator;
 import com.readingtime.restservice.model.ReadingTime;
-import com.readingtime.restservice.model.Words;
+import com.readingtime.restservice.model.ReadingTimeRequest;
 import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +18,26 @@ public class ReadingTimeController{
 
     private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/get")
-    public List<ReadingTime> getAllContent() {
+    @GetMapping("/getAll")
+    public  List<ReadingTime> getAllContent() {
         return readingTimeService.getAllContent();
     }
 
-
     @PostMapping("/calculate")
-    public void CalculateReadingTime(@RequestBody ReadingTime readingTime){
-        readingTimeService.calculateReadingTime(readingTime);
+    public void CalculateReadingTime(@RequestBody ReadingTimeRequest readingTimeRequest){
+        ReadingTime reading = new ReadingTime();
+        reading.setContent(readingTimeRequest.content());
+        readingTimeService.calculateReadingTime(reading);
     }
 
-    @DeleteMapping(path = "{readingTimeId}")
-        public void DeleteReading(@PathVariable("radingTimeId") Long id){
-            readingTimeService.deleteReadingTime(id);
-        }
+    @DeleteMapping("{readingTimeId}")
+        public void DeleteReading(@PathVariable("readingTimeId") Long id) {
+        readingTimeService.deleteReadingTime(id);
+    }
+
+    @GetMapping("{getById}")
+    public void GetById(@PathVariable("getById") long id) {
+        readingTimeService.getById(id);
+    }
 
 }
