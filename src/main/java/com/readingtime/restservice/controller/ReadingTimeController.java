@@ -5,9 +5,8 @@ import com.readingtime.restservice.model.ReadingTimeRequest;
 import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+
 
 @RestController
 @RequestMapping("/readingtime")
@@ -15,8 +14,6 @@ public class ReadingTimeController{
 
     @Autowired
     private ReadingTimeService readingTimeService;
-
-    private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/getAll")
     public  List<ReadingTime> getAllContent() {

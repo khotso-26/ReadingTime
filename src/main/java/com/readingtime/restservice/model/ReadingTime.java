@@ -5,7 +5,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "reaingtime", schema = "USER_APP")
+@Table(name = "readingtime", schema = "READING")
 public class ReadingTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
