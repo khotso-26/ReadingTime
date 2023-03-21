@@ -32,10 +32,6 @@ public class ReadingTimeServiceImplement implements ReadingTimeService {
 
     @Override
     public void calculateReadingTime(ReadingTime reading) {
-        String content = reading.getContent();
-        Words words = new Words(content);
-        Calculator calculator = new Calculator(words.getArrayOfWords());
-        reading.setContent(calculator.toString());
         readingTimeRepository.save(reading);
     }
 }

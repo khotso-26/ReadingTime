@@ -10,30 +10,49 @@ public class ReadingTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String content;
+    private int seconds;
+    private int minutes;
 
     public ReadingTime() {
     }
 
-    public ReadingTime(long id, String content) {
+    public ReadingTime(long id, int seconds, int minutes) {
         this.id = id;
-        this.content = content;
+        this.seconds = seconds;
+        this.minutes = minutes;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadingTime{" +
+                "id=" + id +
+                ", seconds=" + seconds +
+                ", minutes=" + minutes +
+                '}';
     }
 
     @Override
@@ -41,19 +60,14 @@ public class ReadingTime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReadingTime that = (ReadingTime) o;
-        return id == that.id && content.equals(that.content);
+        return id == that.id && seconds == that.seconds && minutes == that.minutes;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content);
+        return Objects.hash(id, seconds, minutes);
     }
 
-    @Override
-    public String toString() {
-        return "ReadingTime{" +
-                "id=" + id +
-                ", content=" + content +
-                '}';
-    }
+
+
 }

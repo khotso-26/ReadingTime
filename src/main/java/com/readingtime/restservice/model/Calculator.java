@@ -2,31 +2,26 @@ package com.readingtime.restservice.model;
 
 public class Calculator {
 
-    private final String seconds;
-    private String minutes;
+    private final int seconds;
+    private int minutes;
 
-    public Calculator( String[] words) {
-
+    public Calculator(String[] words) {
         String[] wordCount = String.valueOf(words.length / 200d).split("\\.");
-        this.seconds = String.valueOf(Integer.parseInt(wordCount[1]) * 60).substring(0,2);
-        this.minutes = wordCount[0];
+        this.seconds = Integer.parseInt(String.valueOf(Integer.parseInt(wordCount[1]) * 60).substring(0,2));
+        this.minutes = Integer.parseInt(wordCount[0]);
     }
 
-    public String getSeconds() {
-        if (Integer.parseInt(seconds) > 50)
-            this.minutes = String.valueOf(Integer.parseInt(minutes) + 1);
-        return this.seconds;
+    public int getSeconds() {
+        return seconds;
     }
 
-    public String getMinutes() {
-        return this.minutes;
+    public int getMinutes() {
+        return minutes;
     }
 
-    @Override
-    public String toString() {
-        return "Calculator{" +
-                "seconds='" + seconds + '\'' +
-                ", minutes='" + minutes + '\'' +
-                '}';
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
+
+
 }
