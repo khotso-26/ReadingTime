@@ -3,7 +3,7 @@ package com.readingtime.restservice.model;
 public class Calculator {
 
     private final int seconds;
-    private int minutes;
+    private final int minutes;
 
     public Calculator(String[] words) {
         String[] wordCount = String.valueOf(words.length / 200d).split("\\.");
@@ -19,9 +19,6 @@ public class Calculator {
         return minutes;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
 
 
 }
