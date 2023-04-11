@@ -1,6 +1,6 @@
 package com.readingtime.restservice.service;
 
-import com.readingtime.restservice.model.ReadingTime;
+import com.readingtime.restservice.model.readingtime.ReadingTime;
 import java.util.List;
 
 public interface ReadingTimeService {

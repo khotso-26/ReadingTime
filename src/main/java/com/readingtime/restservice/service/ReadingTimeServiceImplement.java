@@ -1,6 +1,6 @@
 package com.readingtime.restservice.service;
 
-import com.readingtime.restservice.model.ReadingTime;
+import com.readingtime.restservice.model.readingtime.ReadingTime;
 import com.readingtime.restservice.repository.ReadingTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,6 @@ public class ReadingTimeServiceImplement implements ReadingTimeService {
     @Override
     public void deleteReadingTime(Long id) {
         if ( readingTimeRepository.existsById(id) ) readingTimeRepository.deleteById(id);
-
     }
 
     @Override

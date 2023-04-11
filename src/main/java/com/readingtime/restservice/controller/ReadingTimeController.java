@@ -1,9 +1,9 @@
 package com.readingtime.restservice.controller;
 
-import com.readingtime.restservice.model.Calculator;
-import com.readingtime.restservice.model.ReadingTime;
-import com.readingtime.restservice.model.ReadingTimeRequest;
-import com.readingtime.restservice.model.Words;
+import com.readingtime.restservice.model.calculator.Calculator;
+import com.readingtime.restservice.model.readingtime.ReadingTime;
+import com.readingtime.restservice.model.readingtime.ReadingTimeRequest;
+import com.readingtime.restservice.model.calculator.Words;
 import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/readingtime")
+@CrossOrigin
+@RequestMapping("/api.readingtime/v1")
 public class ReadingTimeController{
 
     @Autowired
