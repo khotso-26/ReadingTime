@@ -2,7 +2,6 @@ package com.readingtime.restservice.controller;
 
 import com.readingtime.restservice.model.calculator.Calculator;
 import com.readingtime.restservice.model.readingtime.ReadingTime;
-import com.readingtime.restservice.model.readingtime.ReadingTimeRequest;
 import com.readingtime.restservice.model.calculator.Words;
 import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -16,12 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "readingtimeusers")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;

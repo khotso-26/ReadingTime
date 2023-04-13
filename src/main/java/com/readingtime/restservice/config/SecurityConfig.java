@@ -25,7 +25,7 @@ public class SecurityConfig {
         httpSecurity.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("")
+                .requestMatchers("/api.readingtime/v1/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
