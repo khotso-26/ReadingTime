@@ -24,17 +24,7 @@ public class ReadingTimeController{
 
     @PostMapping("/calculate")
     public void CalculateReadingTime(@RequestBody ReadingTimeRequest readingTimeRequest){
-
-        ReadingTime reading = new ReadingTime();
-        Words words = new Words(readingTimeRequest.body());
-        Calculator calculator = new Calculator(words.getArrayOfWords());
-
-        reading.setSeconds(calculator.getSeconds());
-        reading.setMinutes(calculator.getMinutes());
-        reading.setTitle(readingTimeRequest.title());
-        reading.setBody(readingTimeRequest.body());
-
-        readingTimeService.calculateReadingTime(reading);
+        readingTimeService.calculateReadingTime(readingTimeRequest);
     }
 
     @DeleteMapping("{readingTimeId}")

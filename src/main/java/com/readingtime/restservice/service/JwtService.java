@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 public interface JwtService {
 
-    static final String SECRET_KEY = "6E5A7234743777217A25432A462D4A614E645267556B58703273357638782F41";
+
 
     public String extractUsername(String jwtToken);
 

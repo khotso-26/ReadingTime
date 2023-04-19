@@ -1,5 +1,6 @@
 package com.readingtime.restservice.service;
 
+import com.readingtime.restservice.controller.ReadingTimeRequest;
 import com.readingtime.restservice.model.readingtime.ReadingTime;
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface ReadingTimeService {
 
     void getById(long id);
 
-    void calculateReadingTime(ReadingTime reading);
+    void calculateReadingTime(ReadingTimeRequest reading);
 }
