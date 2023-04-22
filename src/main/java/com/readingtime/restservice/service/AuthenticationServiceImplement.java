@@ -33,7 +33,7 @@ public class AuthenticationServiceImplement implements AuthenticationService{
         userRepository.save(user);
         var jwtToken =  jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+                .AccessToken(jwtToken)
                 .build();
     }
 
@@ -50,7 +50,24 @@ public class AuthenticationServiceImplement implements AuthenticationService{
 
         var jwtToken =  jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+                .AccessToken(jwtToken)
+                .build();
+    }
+
+    @Override
+    public AuthenticationResponse refresh(RegisterRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow();
+
+        var jwtToken =  jwtService.generateRefreshToken(user);
+        return AuthenticationResponse.builder()
+                .RefreshToken(jwtToken)
                 .build();
     }
 

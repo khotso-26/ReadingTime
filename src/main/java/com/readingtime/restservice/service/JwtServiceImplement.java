@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtServiceImplement implements JwtService {
 
-    static final String SECRET_KEY = "6E5A7234743777217A25432A462D4A614E645267556B58703273357638782F41";
+    private static final String SECRET_KEY = "6E5A7234743777217A25432A462D4A614E645267556B58703273357638782F41";
 
     @Override
     public String extractUsername(String jwtToken) {
@@ -50,7 +50,16 @@ public class JwtServiceImplement implements JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
 
+    @Override
+    public String generateRefreshToken(UserDetails userDetails){
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 8760))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     @Override
