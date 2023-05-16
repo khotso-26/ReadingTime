@@ -11,7 +11,7 @@ The REST API Reading Time Application is a Java-based application built with Spr
 Before running the application, ensure you have the following dependencies installed:
 - Java Development Kit (JDK) 8 or higher
 - Maven
-- 
+
 ## Installation
 1. Clone the repository or download the source code.
 2. Open a terminal and navigate to the project directory.
@@ -52,7 +52,7 @@ You can use any HTTP client to interact with the API endpoints. Here are a few e
 
 1. Calculate reading time for a text file:
 
-```curl -X POST -H "Content-Type: application/json" -d '{"text": "Lorem ipsum dolor sit amet."}' http://localhost:8080/api.readingtime/v1````
+``` curl -X POST -H "Content-Type: application/json" -d '{"text": "Lorem ipsum dolor sit amet."}' http://localhost:8080/api.readingtime/v1```
 
 2. Calculate reading time for an HTML document:
 
