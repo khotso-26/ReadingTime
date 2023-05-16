@@ -1,20 +1,72 @@
-Do you need to calculate reading time for your blog posts or articles? 
-We’ve been using a simple formula for a long time to calculate the read time for our posts and articles.* 
-It’s based on the generally understood statistic that most adults read at about 200 words per minute.
+# REST API Reading Time Application
+The REST API Reading Time Application is a Java-based application built with Spring Boot. It allows users to retrieve estimated reading times for texts or documents.
 
-(The average reading rate is actually 238, according to this study, 
-but 200 is a nice compromise and is easier to remember.)
+## Features
+- Calculate estimated reading time for a given text or document.
+- Supports various formats: plain text, Markdown, HTML, etc.
+- Configurable reading speed.
+- RESTful API for easy integration with other applications.
 
-Here’s the formula:
+## Prerequisites
+Before running the application, ensure you have the following dependencies installed:
+- Java Development Kit (JDK) 8 or higher
+- Maven
+- 
+## Installation
+1. Clone the repository or download the source code.
+2. Open a terminal and navigate to the project directory.
+3. Run the following command to build the project:
+```mvn clean install```
+4. After a successful build, start the application:
+```java -jar target/reading-time-api.jar```
 
-Get your total word count (including the headline and subhead).
-Divide total word count by 200. The number before the decimal is your minutes.
-Take the decimal points and multiply that number by .60. That will give you your seconds.
-Example:
+## API Endpoints
+### Calculate Reading Time
 
-783 words ÷ 200 = 3.915 (3 = 3 minutes)
-.915 × .60 = .549 (a little over 54 seconds, so I’d bump it up to 60 seconds, or a full minute)
-reading time for this example article is 4 minutes
+Endpoint: `/api.readingtime/v1`
+Method: POST
 
-It seems like reading time calculations go off and on trend, 
-but we like to include them to give people a heads-up before they dive into a post or newsletter article.
+### Request Payload:
+json
+`{
+    "title" : "The big bang theory"
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+}`
+
+Response:
+`{
+    "readingTime": {
+        "minutes": 1,
+        "seconds": 30
+    }
+}`
+
+## Configuration
+The application provides the ability to configure the reading speed (words per minute). By default, the reading speed is set to 200 words per minute.
+
+To modify the reading speed, open the *application.properties* file and update the following property:
+```app.reading-speed=200```
+
+## Usage Examples
+You can use any HTTP client to interact with the API endpoints. Here are a few examples using curl:
+
+1. Calculate reading time for a text file:
+
+```curl -X POST -H "Content-Type: application/json" -d '{"text": "Lorem ipsum dolor sit amet."}' http://localhost:8080/api.readingtime/v1````
+
+2. Calculate reading time for an HTML document:
+
+``` curl -X POST -H "Content-Type: application/json" -d '{"text": "<h1>Lorem ipsum</h1><p>Dolor sit amet.</p>"}' http://localhost:8080/api.readingtime/v1```
+
+## Contributing
+Contributions are welcome! If you would like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes and push the branch to your fork.
+4. Submit a pull request with a description of your changes.
+
+## License
+This project is licensed under the MIT License.
+
+Feel free to customize the README file as per your specific application requirements and add any additional sections that might be relevant

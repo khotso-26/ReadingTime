@@ -52,4 +52,5 @@ public class ReadingTimeServiceImplement implements ReadingTimeService {
 
         readingTimeRepository.save(readingTime);
     }
+
 }

@@ -13,4 +13,5 @@ public interface ReadingTimeService {
     void getById(long id);
 
     void calculateReadingTime(ReadingTimeRequest reading);
+
 }
