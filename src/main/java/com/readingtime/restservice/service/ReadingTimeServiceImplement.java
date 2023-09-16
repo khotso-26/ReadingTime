@@ -2,10 +2,10 @@ package com.readingtime.restservice.service;
 
 import com.readingtime.restservice.controller.ReadingTimeRequest;
 import com.readingtime.restservice.exception.ApiRequestException;
-import com.readingtime.restservice.model.calculator.Calculator;
-import com.readingtime.restservice.model.calculator.Words;
+import com.readingtime.restservice.model.calculator.TextAnalyzer;
 import com.readingtime.restservice.model.readingtime.ReadingTime;
 import com.readingtime.restservice.repository.ReadingTimeRepository;
+import com.readingtime.restservice.service.request_response.ReadingTimeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -39,18 +39,20 @@ public class ReadingTimeServiceImplement implements ReadingTimeService {
     }
 
     @Override
-    public void calculateReadingTime(ReadingTimeRequest reading) {
-
+    public ReadingTimeResponse calculateReadingTime(ReadingTimeRequest reading) {
         ReadingTime readingTime = new ReadingTime();
-        Words words = new Words(reading.body());
-        Calculator calculator = new Calculator(words.getArrayOfWords());
+        String text = reading.body();
+        TextAnalyzer textAnalyzer = new TextAnalyzer(text, reading.speed());
+        textAnalyzer.calculateReadingTime();
 
-        readingTime.setSeconds(calculator.getSeconds());
-        readingTime.setMinutes(calculator.getMinutes());
         readingTime.setTitle(reading.title());
-        readingTime.setBody(reading.body());
+        readingTime.setBody(text);
+        readingTime.setMinutes(textAnalyzer.getMinutes());
+        readingTime.setSeconds(textAnalyzer.getSeconds());
 
-        readingTimeRepository.save(readingTime);
+        ReadingTime savedReadingTime = readingTimeRepository.save(readingTime);
+
+        return new ReadingTimeResponse((int) savedReadingTime.getId(), savedReadingTime.getMinutes(), savedReadingTime.getSeconds());
     }
 
 }

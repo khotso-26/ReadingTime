@@ -1,5 +1,9 @@
 package com.readingtime.restservice.controller;
 
+import com.readingtime.restservice.controller.request_response.AuthenticationRequest;
+import com.readingtime.restservice.controller.request_response.AuthenticationResponse;
+import com.readingtime.restservice.controller.request_response.RefreshRequest;
+import com.readingtime.restservice.controller.request_response.RegisterRequest;
 import com.readingtime.restservice.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +21,19 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(service.register(request));
+        AuthenticationResponse response = service.register(request);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity <AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok(service.authenticate(request));
+    @PostMapping("/login")
+    public ResponseEntity <AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
+        AuthenticationResponse response = service.authenticate(request);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/refresh")
-    public ResponseEntity <AuthenticationResponse> refresh(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(service.refresh(request));
+    @PostMapping("/refresh-token")
+    public ResponseEntity<AuthenticationResponse> refreshToken(@RequestBody RefreshRequest request) {
+        AuthenticationResponse response = service.refresh(request);
+        return ResponseEntity.ok(response);
     }
 }

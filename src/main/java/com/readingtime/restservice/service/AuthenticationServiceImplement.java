@@ -1,20 +1,21 @@
 package com.readingtime.restservice.service;
-
-import com.readingtime.restservice.controller.AuthenticationRequest;
-import com.readingtime.restservice.controller.AuthenticationResponse;
-import com.readingtime.restservice.controller.RegisterRequest;
+import com.readingtime.restservice.controller.request_response.AuthenticationRequest;
+import com.readingtime.restservice.controller.request_response.AuthenticationResponse;
+import com.readingtime.restservice.controller.request_response.RefreshRequest;
+import com.readingtime.restservice.controller.request_response.RegisterRequest;
 import com.readingtime.restservice.model.user.Role;
 import com.readingtime.restservice.model.user.User;
 import com.readingtime.restservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationServiceImplement implements AuthenticationService{
+public class AuthenticationServiceImplement implements AuthenticationService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -23,17 +24,15 @@ public class AuthenticationServiceImplement implements AuthenticationService{
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .firstName(request.getFirstname())
-                .lastName(request.getLastname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .build();
+        User user = buildUserFromRequest(request);
         userRepository.save(user);
-        var jwtToken =  jwtService.generateToken(user);
+
+        String accessToken = jwtService.generateToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+
         return AuthenticationResponse.builder()
-                .AccessToken(jwtToken)
+                .AccessToken(accessToken)
+                .RefreshToken(refreshToken)
                 .build();
     }
 
@@ -45,30 +44,41 @@ public class AuthenticationServiceImplement implements AuthenticationService{
                         request.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        var jwtToken =  jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .AccessToken(jwtToken)
-                .build();
+        String accessToken = jwtService.generateToken(user);
+        return buildAuthenticationResponse(accessToken);
     }
 
     @Override
-    public AuthenticationResponse refresh(RegisterRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+    public AuthenticationResponse refresh(RefreshRequest request) {
+        String username = jwtService.extractUsername(request.getRefreshToken());
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        var jwtToken =  jwtService.generateRefreshToken(user);
+        String newRefreshToken = jwtService.generateRefreshToken(user);
+
         return AuthenticationResponse.builder()
-                .RefreshToken(jwtToken)
+                .AccessToken(newRefreshToken)
                 .build();
     }
 
+
+
+    private User buildUserFromRequest(RegisterRequest request) {
+        return User.builder()
+                .firstName(request.getFirstname())
+                .lastName(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER)
+                .build();
+    }
+
+    private AuthenticationResponse buildAuthenticationResponse(String accessToken) {
+        return AuthenticationResponse.builder()
+                .AccessToken(accessToken)
+                .build();
+    }
 }

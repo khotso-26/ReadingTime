@@ -27,6 +27,11 @@ public class ReadingTime {
         this.body = body;
     }
 
+    public ReadingTime(int seconds, int minutes) {
+        this.seconds = seconds;
+        this.minutes = minutes;
+    }
+
     public long getId() {
         return id;
     }
@@ -35,16 +40,16 @@ public class ReadingTime {
         this.id = id;
     }
 
+    public int getMinutes() {
+        return minutes;
+    }
+
     public int getSeconds() {
         return seconds;
     }
 
     public void setSeconds(int seconds) {
         this.seconds = seconds;
-    }
-
-    public int getMinutes() {
-        return minutes;
     }
 
     public void setMinutes(int minutes) {

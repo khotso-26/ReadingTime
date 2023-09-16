@@ -1,4 +1,4 @@
-package com.readingtime.restservice.controller;
+package com.readingtime.restservice.controller.request_response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

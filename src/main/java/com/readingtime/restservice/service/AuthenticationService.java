@@ -1,17 +1,18 @@
 package com.readingtime.restservice.service;
 
-import com.readingtime.restservice.controller.AuthenticationRequest;
-import com.readingtime.restservice.controller.AuthenticationResponse;
-import com.readingtime.restservice.controller.RegisterRequest;
+import com.readingtime.restservice.controller.request_response.AuthenticationRequest;
+import com.readingtime.restservice.controller.request_response.AuthenticationResponse;
+import com.readingtime.restservice.controller.request_response.RefreshRequest;
+import com.readingtime.restservice.controller.request_response.RegisterRequest;
 
 
 public interface AuthenticationService {
 
 
-    public AuthenticationResponse register(RegisterRequest request);
+    AuthenticationResponse register(RegisterRequest request);
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request);
+    AuthenticationResponse authenticate(AuthenticationRequest request);
 
-    public AuthenticationResponse refresh(RegisterRequest request);
+    AuthenticationResponse refresh(RefreshRequest request);
 
 }
