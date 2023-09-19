@@ -5,6 +5,7 @@ import com.readingtime.restservice.controller.request_response.AuthenticationRes
 import com.readingtime.restservice.controller.request_response.RefreshRequest;
 import com.readingtime.restservice.controller.request_response.RegisterRequest;
 import com.readingtime.restservice.service.AuthenticationService;
+import com.readingtime.restservice.service.request_response.CustomResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,8 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        AuthenticationResponse response = service.register(request);
+    public ResponseEntity<CustomResponse> register(@RequestBody RegisterRequest request){
+        CustomResponse response = service.register(request);
         return ResponseEntity.ok(response);
     }
 
@@ -34,6 +35,12 @@ public class AuthenticationController {
     @PostMapping("/refresh-token")
     public ResponseEntity<AuthenticationResponse> refreshToken(@RequestBody RefreshRequest request) {
         AuthenticationResponse response = service.refresh(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/reauthenticate")
+    public ResponseEntity<AuthenticationResponse> reauthenticate(@RequestBody AuthenticationRequest request) {
+        AuthenticationResponse response = service.reauthenticate(request);
         return ResponseEntity.ok(response);
     }
 }

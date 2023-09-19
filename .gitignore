@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Include application.properties
+!src/main/resources/application.properties
+
+/TO-DO
+
+

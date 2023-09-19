@@ -1,9 +1,6 @@
 package com.readingtime.restservice.model.user;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +23,9 @@ public class User implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    @Getter
+    @Column(name = "is_active")
+    private boolean active;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -63,5 +63,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

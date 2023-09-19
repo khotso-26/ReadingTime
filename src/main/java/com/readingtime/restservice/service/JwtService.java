@@ -31,4 +31,6 @@ public interface JwtService {
 
     public Date extractExpiration(String jwtToken);
 
+    Claims parseToken(String jwtToken);
+
 }
