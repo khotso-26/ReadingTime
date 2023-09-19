@@ -4,12 +4,14 @@ import com.readingtime.restservice.model.readingtime.ReadingTime;
 import com.readingtime.restservice.service.request_response.ReadingTimeResponse;
 import com.readingtime.restservice.service.ReadingTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api.readingtime/v1")
 public class ReadingTimeController{
 
